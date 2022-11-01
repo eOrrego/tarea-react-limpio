@@ -15,7 +15,7 @@ const RouterPrincipal = () => {
                 <Route path='/inicio' element={<Inicio />} />
                 <Route path='/articulos' element={<Articulos />} />
                 <Route path='/detalles' element={<Navigate to="/articulos" />} />
-                <Route path='/detalles/:name' element={<Detalles />} />
+                <Route path='/detalles/:id' element={<Detalles />} />
                 <Route path='*' element={<Pagina404 />} />
             </Routes>
         </BrowserRouter>
