@@ -4,21 +4,22 @@ import Card from '../components/Card';
 
 
 const Articulos = () => {
-  const [pokemones, setPokemones] = useState([]);
+  const [pelis, setPelis] = useState([]);
   const [error, setError] = useState(false);
 
-  const fetchPokemones = async () => {
+  const fetchPelis = async () => {
     try {
-      const { data } = await axios.get('https://pokeapi.co/api/v2/pokemon');
-      setPokemones(data.results);
+      const { data } = await axios.get('https://api.themoviedb.org/3/movie/popular?api_key=fab8e71ef7592de4e689d186ed867f84&language=es-Es');
+      setPelis(data.results);
+      console.log("data:",data.results);
       setError(false);
-    } catch (error) {
+    } catch (errorpe) {
       setError(true);
     }
   }
 
   useEffect(() => {
-    fetchPokemones();
+    fetchPelis();
   }, [])
 
 
@@ -26,15 +27,15 @@ const Articulos = () => {
   return (
     <div className="container">
       <div className="row text-center mt-5">
-        <h1 className="text-info">POKEMONES</h1>
+        <h1 className="text-info">Peliculas Populares</h1>
         {error && (
           <div>
-            <h4 className="text-danger font-weight-700">Los pokemones no están disponibles</h4>
+            <h4 className="text-danger font-weight-700">No hay peliculas disponibles</h4>
           </div>
         )}
         <div className="row">
-          {pokemones.map((pokemon) => (
-            <Card key={pokemon.name} name={pokemon.name} />
+          {pelis.map((peli) => (
+            <Card key={peli.id} id={peli.id} name={peli.title} imgpath={peli.poster_path} />
           ))}
         </div>
       </div>

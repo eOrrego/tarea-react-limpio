@@ -3,41 +3,43 @@ import { useParams, Link } from 'react-router-dom'
 import axios from 'axios';
 
 const Detalles = () => {
-  const { name } = useParams();
-  const [pokemon, setPokemon] = useState({});
+  const { id } = useParams();
+  const [peli, setPeli] = useState({});
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const fetchPokemon = async () => {
+    const fetchPeli = async () => {
       try {
-        const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
-        setPokemon(data);
+        const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=fab8e71ef7592de4e689d186ed867f84&language=es-Es`);
+        setPeli(data);
+        console.log("hola:", data);
         setError(false);
       } catch (error) {
         setError(true);
       }
     }
-    fetchPokemon();
-  }, [name]);
+    fetchPeli();
+  }, [id]);
 
+  let imgUrl = `https://image.tmdb.org/t/p/w500/${peli?.poster_path}`;
 
   return (
     <div className="container">
-      <h1 className="text-info">Detalles del Pokemon</h1>
+      <h1 className="text-info">Detalles de la Pelicula</h1>
+      <Link to="/articulos">
+        <button className="btn btn-outline-info m-auto">Volver</button>
+      </Link>
       {error && (
         <div>
-          <h4 className="text-danger font-weight-700">Los pokemones no existe</h4>
+          <h4 className="text-danger font-weight-700">La pelicula no existe</h4>
         </div>
       )}
       {!error && (
         <div className="row">
-          <h1>Nombre: {pokemon?.name}</h1>
-          <h4>Peso: {pokemon?.weight}</h4>
-          <h4>Talla: {pokemon?.height}</h4>
-          <img src={pokemon?.sprite?.front_default} className="h-25" alt="" />
+          <h1>Titulo: {peli?.title}</h1>
+          <img className='w-50' src={imgUrl} alt="" />
         </div>
       )}
-      <Link to="/articulos">Volver</Link>
     </div>
   )
 }
