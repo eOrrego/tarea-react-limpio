@@ -13,18 +13,18 @@ const Navbar = () => {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <NavLink
-                                className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+                                className={({ isActive }) => isActive ? "btn btn-info m-1 active" : "btn btn-outline-info m-1 "}
                                 aria-current="page"
                                 to="/inicio"
                             >Inicio</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+                            <NavLink className={({ isActive }) => isActive ? "btn btn-info m-1 active" : "btn btn-outline-info m-1"}
                                 to="/articulos"
                             >Articulos</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+                            <NavLink className={({ isActive }) => isActive ? "btn btn-info m-1 active" : "btn btn-outline-info m-1"}
                                 to="/detalles"
                             >Detalles</NavLink>
                         </li>
