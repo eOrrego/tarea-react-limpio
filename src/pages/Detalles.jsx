@@ -14,6 +14,7 @@ const Detalles = () => {
       try {
         setLoading(true);
         const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=fab8e71ef7592de4e689d186ed867f84&language=es-Es`);
+        console.log(data);
         setPeli(data);
         setError(false);
         setLoading(false);
@@ -41,8 +42,9 @@ const Detalles = () => {
         )}
         {!error && (
           <div className="row m-auto text-center">
-            <h1>Titulo: {peli.title}</h1>
-            <img className="img-fluid w-50 m-auto text-center" src={`https://image.tmdb.org/t/p/w500${peli.poster_path}`} alt={peli?.title} />
+            <h1>{peli.title}</h1>
+            <img className="img-fluid w-50 m-auto my-3 text-center" src={`https://image.tmdb.org/t/p/w500${peli.poster_path}`} alt={peli?.title} />
+            <p>{peli.overview}</p>
           </div>
         )}
       </div>
